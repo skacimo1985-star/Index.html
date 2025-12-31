@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🦜 SIREP - ببغاء الشيخ آمود 🇩🇿</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#0066cc;--success:#00cc66;--gold:#ffd700;--bird:#28a745;--dark:#1a1a1a;--glass:rgba(255,255,255,0.15)}
+body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:linear-gradient(135deg,#001f3f 0%,var(--primary) 25%,var(--success) 50%,var(--gold) 75%,var(--bird) 100%);background-size:400% 400%;animation:gradientShift 20s ease infinite;color:#fff;min-height:100vh}
+@keyframes gradientShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.container{max-width:1400px;margin:0 auto;padding:20px}
+.header{position:relative;background:var(--glass);backdrop-filter:blur(30px);border-radius:40px;padding:80px;border:5px solid var(--gold);margin-bottom:30px;box-shadow:0 40px 120px rgba(0,0,0,0.6)}
+.bird-header{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:40px;margin-bottom:30px}
+.moon-icon{font-size:6em;animation:float 4s ease-in-out infinite}
+.bird-icon{font-size:7em;animation:bob 2s infinite}
+@keyframes float{0%,100%{transform:translateY(0px) scale(1)}50%{transform:translateY(-25px) scale(1.05)}}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(0deg)}25%{transform:translateY(-15px) rotate(-8deg)}75%{transform:translateY(-15px) rotate(8deg)}}
+.platform-title{font-size:3.8em;font-weight:900;background:linear-gradient(45deg,var(--gold),#fff,var(--bird));background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer 3s infinite;text-align:center}
+@keyframes shimmer{0%,100%{background-position:0%}50%{background-position:200%}}
+.slogan{font-size:1.6em;text-align:center;margin:20px 0;opacity:0.95}
+.status-badge{position:fixed;top:20px;left:20px;background:linear-gradient(45deg,#00ff88,#28a745);color:#fff;padding:20px 30px;border-radius:30px;font-weight:bold;font-size:1.2em;box-shadow:0 15px 50px rgba(0,255,136,0.5);z-index:1000;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.live-profit{font-size:2.5em;text-align:center;font-weight:700;color:var(--gold);margin:20px 0;text-shadow:0 0 20px var(--gold)}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;margin:40px 0}
+.stat-card{background:var(--glass);backdrop-filter:blur(25px);border-radius:30px;padding:45px;text-align:center;border:3px solid rgba(255,215,0,0.7);transition:all 0.6s}
+.stat-card:hover{transform:translateY(-25px) scale(1.05);box-shadow:0 50px 150px rgba(255,215,0,0.5)}
+.stat-value{font-size:4em;font-weight:900;color:var(--gold);margin-bottom:15px;text-shadow:0 0 20px var(--gold)}
+.stat-label{font-size:1.3em;font-weight:600}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:40px;margin:70px 0}
+.service-card{background:var(--glass);backdrop-filter:blur(25px);border-radius:35px;padding:50px;text-align:center;border:4px solid transparent;background-clip:padding-box;transition:all 0.5s;box-shadow:0 20px 60px rgba(0,0,0,0.3)}
+.service-card:nth-child(1){border-color:#007bff}
+.service-card:nth-child(2){border-color:var(--bird)}
+.service-card:nth-child(3){border-color:#dc3545}
+.service-card:nth-child(4){border-color:#ffc107}
+.service-card:nth-child(5){border-color:#ff6b35}
+.service-card:hover{transform:translateY(-20px) scale(1.03);box-shadow:0 40px 120px rgba(0,0,0,0.5)}
+.service-icon{font-size:3.5em;margin-bottom:20px}
+.service-metric{font-size:3em;font-weight:900;margin:25px 0;text-shadow:0 0 25px currentColor}
+.service-title{font-size:1.7em;margin-bottom:20px;font-weight:700}
+.takaful-section{background:linear-gradient(135deg,var(--bird),#20c997,var(--bird));border-radius:50px;padding:80px;margin:80px 0;position:relative;overflow:hidden;box-shadow:0 50px 150px rgba(40,167,69,0.6)}
+.takaful-title{font-size:4em;text-align:center;margin-bottom:60px;color:#fff;text-shadow:0 0 40px rgba(255,255,255,0.9)}
+.takaful-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px;margin:60px 0}
+.takaful-card{background:var(--glass);backdrop-filter:blur(30px);border-radius:35px;padding:60px;text-align:center;border:4px solid rgba(255,255,255,0.5);transition:all 0.5s}
+.takaful-card:hover{transform:translateY(-20px);border-color:var(--gold)}
+.takaful-icon{font-size:5em;margin-bottom:30px}
+.success-section{background:linear-gradient(135deg,#00ff88,#28a745);border-radius:40px;padding:60px;margin:80px 0;text-align:center}
+.success-title{font-size:3.5em;color:#fff;margin-bottom:40px;text-shadow:0 0 20px rgba(255,255,255,0.9)}
+.success-url{font-size:1.8em;color:var(--gold);word-break:break-all;margin:20px 0;font-weight:700;background:var(--glass);padding:20px;border-radius:20px;display:inline-block}
+.action-buttons{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:50px;margin:100px 0}
+.action-btn{background:linear-gradient(135deg,var(--gold),#ffed4a,#ffd700);color:var(--dark);border:none;padding:35px 60px;border-radius:50px;font-size:1.8em;font-weight:900;cursor:pointer;transition:all 0.6s;width:100%;text-transform:uppercase;letter-spacing:2px;box-shadow:0 30px 90px rgba(255,215,0,0.6);position:relative;overflow:hidden}
+.action-btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent);transition:0.7s}
+.action-btn:hover::before{left:100%}
+.action-btn:hover{transform:translateY(-20px) scale(1.1);box-shadow:0 60px 180px rgba(255,215,0,0.9)}
+@media(max-width:768px){.container{padding:15px}.services-grid,.takaful-grid,.action-buttons{grid-template-columns:1fr;gap:25px}.bird-header{flex-direction:column}.platform-title{font-size:2.8em}.status-badge{position:static;margin:20px auto;display:block;width:max-content}}
+</style>
+</head>
+<body>
+<div class="status-badge">✅ GitHub Pages<br>يعمل بنجاح!</div>
+
+<div class="container">
+<div class="header">
+<div class="bird-header">
+<div class="moon-icon">🌙</div>
+<div class="bird-icon">🦜</div>
+</div>
+<div class="platform-title">ببغاء SIREP</div>
+<div class="slogan">المنصة الكاملة - بريدي موب + بوت + تكافل + الواحة</div>
+<div class="live-profit">صافي الربح: <span id="liveProfit">1.52M</span> دج/شهر</div>
+</div>
+
+<div class="stats-grid">
+<div class="stat-card">
+<div class="stat-value">3.04M</div>
+<div class="stat-label">إجمالي الإيرادات</div>
+</div>
+<div class="stat-card">
+<div class="stat-value" style="color:var(--bird)">912K</div>
+<div class="stat-label">صندوق التكافل</div>
+</div>
+<div class="stat-card">
+<div class="stat-value">56</div>
+<div class="stat-label">مستفيدون</div>
+</div>
+<div class="stat-card">
+<div class="stat-value">720</div>
+<div class="stat-label">kWh/يوم فائض</div>
+</div>
+</div>
+
+<div class="services-grid">
+<div class="service-card">
+<div class="service-icon">✈️</div>
+<div class="service-title">برنامج العمرة</div>
+<div class="service-metric" style="color:#007bff">135K</div>
+<button class="action-btn">ترشيح فوري</button>
+</div>
+<div class="service-card">
+<div class="service-icon">🚕</div>
+<div class="service-title">السياحة</div>
+<div class="service-metric" style="color:var(--bird)">200K</div>
+<button class="action-btn">ترشيح فوري</button>
+</div>
+<div class="service-card">
+<div class="service-icon">👶</div>
+<div class="service-title">رعاية اليتامى</div>
+<div class="service-metric" style="color:#dc3545">50K</div>
+<button class="action-btn">ترشيح فوري</button>
+</div>
+<div class="service-card">
+<div class="service-icon">🏜️</div>
+<div class="service-title">الواحة الذكية</div>
+<div class="service-metric" style="color:#ffc107">720kWh</div>
+<button class="action-btn">ميني موديل</button>
+</div>
+<div class="service-card">
+<div class="service-icon">🌱</div>
+<div class="service-title">التنمية</div>
+<div class="service-metric" style="color:#ff6b35">58 طن</div>
+<button class="action-btn">زراعة مائية</button>
+</div>
+</div>
+
+<div class="takaful-section">
+<h2 class="takaful-title">💳 بريدي موب + بوت تيليجرام</h2>
+<div class="takaful-grid">
+<div class="takaful-card">
+<div class="takaful-icon">💰</div>
+<h3>سحب بدون بطاقة</h3>
+<p>20K دج كل 24س<br>كود 10أرقام + SMS</p>
+</div>
+<div class="takaful-card">
+<div class="takaful-icon">🤖</div>
+<h3>أوامر البوت</h3>
+<p>/start /umra /siyakh<br>/takaful /baridi</p>
+</div>
+<div class="takaful-card">
+<div class="takaful-icon">📱</div>
+<h3>ECCP + PWA</h3>
+<p>Android • iOS • Web<br>GitHub Pages Live</p>
+</div>
+<div class="takaful-card">
+<div class="takaful-icon">🌡️</div>
+<h3>Node-RED</h3>
+<p>Arduino Live Data<br>720kWh/2ث</p>
+</div>
+</div>
+</div>
+
+<div class="success-section">
+<h2 class="success-title">🎉 تم النشر بنجاح!</h2>
+<div class="success-url">https://skacim1985.github.io/sirep-dz/</div>
+<p style="font-size:1.6em;margin:30px 0">موقعك الحي متاح عالمياً ✅<br>بريدي موب + بوت + تكافل جاهز!</p>
+<button class="action-btn" onclick="visitSite()" style="background:linear-gradient(135deg,var(--gold),#ffed4a);color:#000;margin-top:30px;font-size:2em">🌐 زيارة الموقع الحي</button>
+</div>
+
+<div class="action-buttons">
+<button class="action-btn" onclick="startSIREP()">🚀 ابدأ SIREP</button>
+<button class="action-btn" onclick="connectBaridi()">💳 بريدي موب</button>
+<button class="action-btn" onclick="launchBot()">🤖 البوت</button>
+<button class="action-btn" onclick="miniModel()">🏜️ الواحة</button>
+</div>
+</div>
+
+<script>
+const profitEl=document.getElementById('liveProfit');
+const siteUrl='https://skacim1985.github.io/sirep-dz/';
+
+setInterval(()=>{
+  const base=1.52+Math.sin(Date.now()/10000)*0.08;
+  profitEl.textContent=base.toFixed(2)+'M';
+},2500);
+
+function visitSite(){
+  window.open(siteUrl,'_blank');
+  alert('✅ موقعك الحي:
+'+siteUrl+'
+🦜 SIREP جاهز عالمياً!');
+}
+
+function startSIREP(){alert('🦜 ببغاء SIREP مفعّل!
+GitHub Pages + بريدي موب جاهز')}
+function connectBaridi(){alert('💳 بريدي موب:
+1️⃣ حمل ECCP App
+2️⃣ ربط Edahabia
+3️⃣ سحب 20K cardless')}
+function launchBot(){window.open('https://t.me/SIREP_Bot_Shikh_Amoud','_blank')}
+function miniModel(){alert('🏜️ ميني موديل:
+Arduino Uno + Node-RED
+300 دج - يناير 2026')}
+
+document.querySelectorAll('.action-btn').forEach(btn=>{
+  const original=btn.textContent;
+  btn.dataset.original=original;
+  btn.onclick=()=>{
+    btn.textContent='✅ تم التنفيذ';
+    btn.style.background='linear-gradient(135deg,#00ff88,#28a745)';
+    setTimeout(()=>{btn.textContent=btn.dataset.original;btn.style.background='';},2500);
+  };
+});
+</script>
+</body>
+</html>
