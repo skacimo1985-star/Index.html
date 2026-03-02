@@ -1,245 +1,111 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>SIREP Oasis Nexus - Smart Intelligence & Renewable Energy Platform</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    :root { --primary: #006233; --secondary: #0b3b71; --accent: #ffe066; --bg: #f8fafc; --card: #ffffff; }
-    body { margin: 0; font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: #1e293b; line-height: 1.6; }
-    header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff; padding: 2rem 1rem 3rem; text-align: center; clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%); }
-    header h1 { margin: 0; font-size: 2rem; letter-spacing: 1px; }
-    header p { margin: 0.5rem 0; opacity: 0.9; font-weight: 300; }
-    .status-badge { background: var(--accent); color: #000; padding: 0.3rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: bold; display: inline-block; margin-top: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-    nav { display: flex; justify-content: center; gap: 0.5rem; margin-top: 1.5rem; flex-wrap: wrap; }
-    nav button { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 0.6rem 1.2rem; border-radius: 30px; cursor: pointer; transition: 0.3s; backdrop-filter: blur(5px); }
-    nav button.active, nav button:hover { background: var(--accent); color: var(--secondary); border-color: var(--accent); transform: translateY(-2px); }
-    main { max-width: 1100px; margin: -2rem auto 3rem; padding: 0 1rem; display: grid; gap: 1.5rem; }
-    .card { background: var(--card); border-radius: 16px; padding: 1.5rem; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
-    .card h2 { margin-top: 0; font-size: 1.25rem; color: var(--secondary); display: flex; align-items: center; gap: 0.5rem; }
-    .card h2::after { content: ''; flex: 1; height: 1px; background: #e2e8f0; margin-right: 10px; }
-    .grid-dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
-    .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-top: 1rem; }
-    .stat-box { background: #f1f5f9; padding: 1rem; border-radius: 12px; text-align: center; border-bottom: 3px solid var(--primary); }
-    .stat-val { font-size: 1.5rem; font-weight: 800; color: var(--secondary); display: block; }
-    .stat-label { font-size: 0.75rem; color: #64748b; text-transform: uppercase; }
-    .chart-container { position: relative; height: 300px; width: 100%; margin-top: 1rem; }
-    .live-indicator { display: inline-block; width: 8px; height: 8px; background: #ef4444; border-radius: 50%; margin-left: 5px; animation: blink 1s infinite; }
-    @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
-    .btn-action { background: var(--secondary); color: #fff; border: none; padding: 0.8rem 1.5rem; border-radius: 8px; cursor: pointer; font-weight: 600; width: 100%; margin-top: 10px; transition: 0.2s; }
-    .btn-action:hover { opacity: 0.9; }
-    .btn-action.stop { background: #ef4444; }
-    .alert-log { margin-top: 1rem; height: 120px; overflow-y: auto; background: #0f172a; color: #10b981; padding: 0.8rem; border-radius: 8px; font-family: monospace; font-size: 0.8rem; }
-    .alert-log p { margin: 0 0 5px; }
-    .list-item { display: flex; align-items: flex-start; gap: 0.8rem; margin-bottom: 1rem; }
-    .icon-circle { background: #dcfce7; color: var(--primary); min-width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.8rem; }
-    footer { text-align: center; padding: 2rem; color: #64748b; font-size: 0.85rem; }
-    @media (max-width: 768px) { header h1 { font-size: 1.5rem; } }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIREP Oasis Nexus - Smart Intelligence & Renewable Energy Platform</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #006233;
+            --secondary: #0b3b71;
+            --accent: #ffe066;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #1e293b;
+        }
+        body { margin: 0; font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff; padding: 2rem 1rem 3rem; text-align: center; clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%); }
+        header h1 { margin: 0; font-size: 2rem; letter-spacing: 1px; }
+        header p { margin: 0.5rem 0; opacity: 0.9; font-weight: 300; }
+        .status-badge { background: var(--accent); color: #000; padding: 0.3rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: bold; display: inline-block; margin-top: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        nav { display: flex; justify-content: center; gap: 0.5rem; margin-top: 1.5rem; flex-wrap: wrap; }
+        nav button { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 0.6rem 1.2rem; border-radius: 30px; cursor: pointer; transition: 0.3s; backdrop-filter: blur(5px); }
+        nav button.active, nav button:hover { background: var(--accent); color: var(--secondary); border-color: var(--accent); transform: translateY(-2px); }
+        main { max-width: 1100px; margin: -2rem auto 3rem; padding: 0 1rem; display: grid; gap: 1.5rem; }
+        .card { background: var(--card); border-radius: 16px; padding: 1.5rem; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
+        .card h2 { margin-top: 0; font-size: 1.25rem; color: var(--secondary); display: flex; align-items: center; gap: 0.5rem; }
+        .card h2::after { content: ''; flex: 1; height: 1px; background: #e2e8f0; margin-right: 10px; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.9rem; }
+        th, td { border: 1px solid #e2e8f0; padding: 1rem; text-align: right; }
+        th { background: #f1f5f9; color: var(--secondary); font-weight: 700; }
+        tr:nth-child(even) { background: #f8fafc; }
+        .tech-list { list-style: none; padding: 0; }
+        .tech-list li { display: flex; align-items: center; gap: 10px; margin-bottom: 0.8rem; padding: 0.8rem; background: #f1f5f9; border-radius: 10px; }
+        .tech-icon { background: var(--primary); color: #fff; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold; }
+        footer { text-align: center; padding: 2rem; color: #64748b; font-size: 0.85rem; border-top: 1px solid #e2e8f0; margin-top: 2rem; }
+    </style>
 </head>
 <body>
-<header>
-  <h1>SIREP Oasis Nexus</h1>
-  <p>المنصة الذكية المتكاملة لإدارة الطاقة والري في الواحات المستدامة</p>
-  <div class="status-badge">مشروع مرشح لعلامة Startup Label - ASF / CDE</div>
-  <nav>
-    <button class="active" onclick="switchTab('dash', this)">لوحة القيادة</button>
-    <button onclick="switchTab('tech', this)">الهندسة التقنية</button>
-    <button onclick="switchTab('business', this)">الجدوى الاقتصادية</button>
-    <button onclick="switchTab('impact', this)">الأثر البيئي</button>
-  </nav>
-</header>
-<main>
-  <div id="dash" class="tab-content">
-    <div class="grid-dashboard">
-      <div class="card">
-        <h2><span class="live-indicator"></span> البيانات اللحظية (SCADA)</h2>
-        <div class="chart-container"><canvas id="mainChart"></canvas></div>
-        <div class="stat-grid">
-          <div class="stat-box"><span class="stat-val" id="val-solar">8.4</span><span class="stat-label">إنتاج شمسي (kW)</span></div>
-          <div class="stat-box"><span class="stat-val" id="val-water">120</span><span class="stat-label">تدفق الماء (L/min)</span></div>
+    <header>
+        <h1>SIREP Oasis Nexus</h1>
+        <p>المنصة الذكية المتكاملة لإدارة الطاقة والري في الواحات المستدامة</p>
+        <div class="status-badge">مشروع مرشح لعلامة Startup Label - ASF / CDE</div>
+        <nav>
+            <button onclick="showTab('dashboard', this)" class="active">لوحة القيادة</button>
+            <button onclick="showTab('tech', this)">الهندسة التقنية</button>
+            <button onclick="showTab('economic', this)">الجدوى الاقتصادية</button>
+            <button onclick="showTab('environment', this)">الأثر البيئي</button>
+        </nav>
+    </header>
+
+    <main>
+        <div id="dashboard" class="tab-content active">
+            <div class="card">
+                <h2>البيانات اللحظية (SCADA)</h2>
+                <div style="height: 300px; position: relative;"><canvas id="mainChart"></canvas></div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 1.5rem;">
+                    <div style="background: #f1f5f9; padding: 1rem; border-radius: 12px; text-align: center; border-bottom: 3px solid var(--primary);">
+                        <span style="font-size: 1.5rem; font-weight: 800; color: var(--secondary);">8.4</span>
+                        <div style="font-size: 0.75rem; color: #64748b;">إنتاج شمسي (kW)</div>
+                    </div>
+                    <div style="background: #f1f5f9; padding: 1rem; border-radius: 12px; text-align: center; border-bottom: 3px solid var(--secondary);">
+                        <span style="font-size: 1.5rem; font-weight: 800; color: var(--secondary);">120</span>
+                        <div style="font-size: 0.75rem; color: #64748b;">تدفق الماء (L/min)</div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="card">
-        <h2>التحكم الذكي (EMS)</h2>
-        <div class="stat-grid">
-          <div class="stat-box"><span class="stat-val" id="val-batt">92%</span><span class="stat-label">مستوى التخزين</span></div>
-          <div class="stat-box"><span class="stat-val" id="val-soil">45%</span><span class="stat-label">رطوبة التربة</span></div>
+
+        <div id="tech" class="tab-content">
+            <div class="card">
+                <h2>الهيكلة التقنية والابتكار</h2>
+                <p>تعتمد منصة SIREP على هندسة NEXUS التي تدمج بين التحكم الرقمي والموارد الطبيعية.</p>
+                <ul class="tech-list">
+                    <li><span class="tech-icon">1</span> <b>نظام SCADA:</b> إشراف مركزي وتحكم عن بعد في المضخات.</li>
+                    <li><span class="tech-icon">2</span> <b>أجهزة IoT:</b> استشعار رطوبة التربة والحرارة بدقة ESP32.</li>
+                    <li><span class="tech-icon">3</span> <b>تكنولوجيا CSP:</b> استخدام الطاقة الشمسية المركزة للاستدامة.</li>
+                </ul>
+                <h3>الأشجار الملائمة لواحة SIREP</h3>
+                <table>
+                    <thead><tr><th>رقم</th><th>الاسم العربي</th><th>الاسم العلمي</th><th>ملاحظات فنية</th></tr></thead>
+                    <tbody>
+                        <tr><td>1</td><td>نخيل التمر</td><td>Phoenix dactylifera</td><td>أساس الطبقة العلوية في الواحة.</td></tr>
+                        <tr><td>2</td><td>الطلح الصحراوي</td><td>Acacia raddiana</td><td>تثبيت التربة ومصدات رياح.</td></tr>
+                        <tr><td>3</td><td>الأرغان</td><td>Argania spinosa</td><td>قيمة اقتصادية وزيت عالي الجودة.</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <button id="pumpBtn" class="btn-action" onclick="togglePump()">بدء دورة الري الذكي</button>
-        <div class="alert-log" id="log"><p>> النظام جاهز العمل...</p><p>> فحص الاتصال بعقدة SIREP-01: متصل</p></div>
-      </div>
-    </div>
-  </div>
-  <div id="tech" class="tab-content" style="display:none">
-    <div class="card">
-      <h2>الهيكلة التقنية للنظام</h2>
-      <div class="list-item"><div class="icon-circle">1</div><div><strong>وحدات التحكم المحلية:</strong> أجهزة IoT مبنية على ESP32/ARM.</div></div>
-      <div class="list-item"><div class="icon-circle">2</div><div><strong>بروتوكول الاتصال:</strong> استخدام LoRaWAN و MQTT.</div></div>
-    </div>
-  </div>
-  <div id="business" class="tab-content" style="display:none">
-    <div class="card">
-      <h2>النموذج الربحي</h2>
-      <p>يستهدف المشروع المزارع الكبرى والمستثمرين في الجنوب الجزائري.</p>
-    </div>
-  </div>
-  <div id="impact" class="tab-content" style="display:none">
-    <div class="card">
-      <h2>الاستدامة</h2>
-      <div class="stat-grid">
-        <div class="stat-box"><span class="stat-val">CO2</span><span class="stat-label">تقليل الانبعاثات</span></div>
-        <div class="stat-box"><span class="stat-val">H2O</span><span class="stat-label">كفاءة مائية</span></div>
-      </div>
-    </div>
-  </div>
-</main>
-<footer>
-  <p>تصميم وتطوير: فريق SIREP Oasis Lab | 2026</p>
-</footer>
-<script>
-  function switchTab(id, btn) {
-    document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
-    document.getElementById(id).style.display = 'block';
-    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-  }
-  const ctx = document.getElementById('mainChart').getContext('2d');
-  const mainChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: ['08:00', '10:00', '12:00', '14:00', '16:00', '18:00'],
-      datasets: [{
-        label: 'الإنتاج (kW)',
-        data: [2, 5, 12, 11, 7, 3],
-        borderColor: '#006233',
-        backgroundColor: 'rgba(0,98,51,0.1)',
-        fill: true, tension: 0.4
-      }]
-    }
-  });
-  let pumpActive = false;
-  function togglePump() {
-    pumpActive = !pumpActive;
-    const btn = document.getElementById('pumpBtn');
-    const log = document.getElementById('log');
-    if(pumpActive) {
-      btn.innerText = 'إيقاف دورة الري';
-      btn.classList.add('stop');
-      log.innerHTML += `<p>> ${new Date().toLocaleTimeString('ar-DZ')}: تم تفعيل المضخة</p>`;
-    } else {
-      btn.innerText = 'بدء دورة الري الذكي';
-      btn.classList.remove('stop');
-      log.innerHTML += `<p>> ${new Date().toLocaleTimeString('ar-DZ')}: تم إيقاف النظام</p>`;
-    }
-    log.scrollTop = log.scrollHeight;
-  }
-  setInterval(() => {
-    const val = (Math.random() * 5 + 7).toFixed(1);
-    document.getElementById('val-solar').innerText = val;
-  }, 3000);
-</script>
-  <!-- ===== جدول الأشجار الملائمة لواحة SIREP ===== -->
-  <section style="padding:2rem 1rem; background:#f7f7f7; direction:rtl; font-family:Tahoma,Arial,sans-serif;">
-    <h2 style="text-align:center; font-size:1.4rem; margin-bottom:1rem; color:#006233;">الأشجار الملائمة لواحة SIREP - Saharian Atlas Oasis</h2>
-    <div style="max-width:100%; overflow-x:auto; background:#fff; border:1px solid #ddd; border-radius:6px; padding:0.5rem; box-shadow:0 2px 4px rgba(0,0,0,0.05);">
-      <table style="width:100%; border-collapse:collapse; min-width:700px;">
-        <thead style="background-color:#e3f2fd;">
-          <tr>
-            <th style="border:1px solid #ccc; padding:0.5rem; text-align:center; font-size:0.9rem;">رقم</th>
-            <th style="border:1px solid #ccc; padding:0.5rem; text-align:center; font-size:0.9rem;">الاسم العربي</th>
-            <th style="border:1px solid #ccc; padding:0.5rem; text-align:center; font-size:0.9rem;">الاسم العلمي (Latin)</th>
-            <th style="border:1px solid #ccc; padding:0.5rem; text-align:center; font-size:0.9rem;">البيئة الملائمة</th>
-            <th style="border:1px solid #ccc; padding:0.5rem; text-align:center; font-size:0.9rem;">الدور في واحة SIREP</th>
-            <th style="border:1px solid #ccc; padding:0.5rem; text-align:center; font-size:0.9rem;">ملاحظات فنية</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">1</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">نخيل التمر</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">Phoenix dactylifera</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">واحات صحراوية، مناخ جاف حار</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">إنتاج تمور، ظل علوي، تحسين المناخ المحلي (Oasis effect)</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">يتحمل الجفاف والملوحة، أساس الطبقة العلوية في الواحة.</td>
-          </tr>
-          <tr style="background:#fafafa;">
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">2</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">الطلح / السنط الصحراوي</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">Acacia raddiana</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">سهوب وأطراف الصحراء، مناخ شبه جاف</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">تثبيت التربة، مصدّ رياح، تحسين التربة (تثبيت نيتروجين)</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">شجرة مقاومة للجفاف، مناسبة للأحزمة الخضراء.</td>
-          </tr>
-          <tr>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">3</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">الأثل</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">Tamarix aphylla</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">مناطق جافة ومالحة، ضفاف أودية وسدود</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">مصدّ رياح قوي، تثبيت الكثبان الرملية</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">يتحمل الملوحة والرياح الشديدة.</td>
-          </tr>
-          <tr style="background:#fafafa;">
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">4</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">الخروب</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">Ceratonia siliqua</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">مناخ متوسطي شبه جاف، الأطلس الصحراوي</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">إنتاج قرون علفية وغذائية، تثبيت تربة، تظليل متوسط</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">شجرة معمّرة تتحمل الجفاف النسبي.</td>
-          </tr>
-          <tr>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">5</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">الكاليتوس (الكينا الحمراء)</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">Eucalyptus camaldulensis</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">مناطق شبه جافة قرب مجاري المياه</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">مصدّ رياح، إنتاج خشب، تجفيف نقاط تجمع المياه الراكدة</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">نمو سريع، يحتاج تدبيراً دقيقاً لاستهلاك الماء.</td>
-          </tr>
-          <tr style="background:#fafafa;">
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">6</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">الكازوارينا</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">Casuarina equisetifolia</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">سواحل وجبهات رياح، مناطق رملية جافة</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">مصدّ رياح، تثبيت كثبان، حماية المنشآت والطرق</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">تتحمل الملوحة والرياح القوية.</td>
-          </tr>
-          <tr>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">7</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">البطم الأطلسي</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">Pistacia atlantica</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">الأطلس الصحراوي، مناخ شبه جاف إلى صحراوي</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">شجرة تراثية، تثبيت تربة المنحدرات، تنويع الغطاء الشجري</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">مقاومة للجفاف والبرد النسبي.</td>
-          </tr>
-          <tr style="background:#fafafa;">
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">8</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">الطرفاء / الطرف</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">Tamarix spp.</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">أودية، منخفضات مالحة، مناخ جاف</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">تثبيت ضفاف الأودية، مصدّ رياح موضعي</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">تتحمل الغمر المؤقت والملوحة السطحية.</td>
-          </tr>
-          <tr>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">9</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">الأرغان</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">Argania spinosa</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">شبه جاف، تربة حصوية–صخرية</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">إنتاج زيت عالي القيمة، تثبيت التربة، جذب سياحي</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">ملائمة للمناطق الانتقالية مع عمق تربة كافٍ.</td>
-          </tr>
-          <tr style="background:#fafafa;">
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">10</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">السدر</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">Ziziphus spina-christi</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">مناطق جافة وشبه جافة</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">إنتاج ثمار، سياج حي، ظل موضعي بالقرب من التجهيزات</td>
-            <td style="border:1px solid #ccc; padding:0.5rem; text-align:center;">يتحمل الجفاف والحرارة، جذاب للنحل (عسل السدر).</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
+    </main>
+
+    <footer>
+        <p>تصميم وتطوير: فريق SIREP Oasis Lab | MAHROUG ERRAS BELKACEM</p>
+        <p>© 2025-2026 جميع الحقوق محفوظة</p>
+    </footer>
+
+    <script>
+        function showTab(t, b) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.getElementById(t).classList.add('active');
+            document.querySelectorAll('nav button').forEach(n => n.classList.remove('active'));
+            b.classList.add('active');
+        }
+        const ctx = document.getElementById('mainChart').getContext('2d');
+        new Chart(ctx, { type: 'line', data: { labels: ['08:00', '10:00', '12:00', '14:00', '16:00', '18:00'], datasets: [{ label: 'الإنتاج (kW)', data: [2, 5, 12, 11, 7, 3], borderColor: '#006233', backgroundColor: 'rgba(0,98,51,0.1)', fill: true, tension: 0.4 }] }, options: { responsive: true, maintainAspectRatio: false } });
+    </script>
 </body>
 </html>
-ون ان
