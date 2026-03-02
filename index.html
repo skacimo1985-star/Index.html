@@ -2,159 +2,143 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>منصة SIREP Oasis Lab</title>
+  <title>SIREP Oasis Nexus - Smart Intelligence & Renewable Energy Platform</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    body {
-      margin: 0;
-      font-family: system-ui, Tahoma, Arial, sans-serif;
-      background: #f4f7f9;
-      color: #111;
-    }
-    header {
-      background: linear-gradient(135deg, #006233, #0b3b71);
-      color: #fff;
-      padding: 1rem 1.5rem;
-      text-align: center;
-    }
-    header h1 { margin: 0; font-size: 1.6rem; }
-    header p { margin: 0.3rem 0 0; font-size: 0.9rem; }
-
-    .lang-switch {
-      position: absolute;
-      left: 1rem;
-      top: 1rem;
-      display: flex;
-      gap: 0.3rem;
-      font-size: 0.8rem;
-    }
-    .lang-switch button {
-      border: none;
-      padding: 0.2rem 0.5rem;
-      border-radius: 4px;
-      cursor: pointer;
-      background: #ffffff33;
-      color: #fff;
-    }
-
-    main {
-      max-width: 900px;
-      margin: 1.5rem auto;
-      padding: 0 1rem 2rem;
-    }
-    .card {
-      background: #fff;
-      border-radius: 8px;
-      padding: 1rem 1.2rem;
-      margin-bottom: 1rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-    }
-    .card h2 {
-      margin-top: 0;
-      font-size: 1.1rem;
-      border-right: 4px solid #006233;
-      padding-right: 0.4rem;
-    }
-    .tagline {
-      font-size: 0.95rem;
-      color: #333;
-    }
-    ul {
-      padding-right: 1.2rem;
-      margin: 0.4rem 0 0.6rem;
-      font-size: 0.9rem;
-    }
-    li { margin-bottom: 0.2rem; }
-
-    .badge {
-      display: inline-block;
-      background: #ffe066;
-      color: #222;
-      padding: 0.15rem 0.45rem;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      margin-left: 0.3rem;
-    }
-
-    .cta {
-      text-align: center;
-      margin-top: 1rem;
-    }
-    .cta a {
-      display: inline-block;
-      padding: 0.6rem 1.4rem;
-      border-radius: 999px;
-      background: #0b3b71;
-      color: #fff;
-      text-decoration: none;
-      font-size: 0.9rem;
-    }
-
-    footer {
-      text-align: center;
-      font-size: 0.75rem;
-      color: #555;
-      padding: 1rem 0 1.2rem;
-    }
+    :root { --primary: #006233; --secondary: #0b3b71; --accent: #ffe066; --bg: #f8fafc; --card: #ffffff; }
+    body { margin: 0; font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: #1e293b; line-height: 1.6; }
+    header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff; padding: 2rem 1rem 3rem; text-align: center; clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%); }
+    header h1 { margin: 0; font-size: 2rem; letter-spacing: 1px; }
+    header p { margin: 0.5rem 0; opacity: 0.9; font-weight: 300; }
+    .status-badge { background: var(--accent); color: #000; padding: 0.3rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: bold; display: inline-block; margin-top: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+    nav { display: flex; justify-content: center; gap: 0.5rem; margin-top: 1.5rem; flex-wrap: wrap; }
+    nav button { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 0.6rem 1.2rem; border-radius: 30px; cursor: pointer; transition: 0.3s; backdrop-filter: blur(5px); }
+    nav button.active, nav button:hover { background: var(--accent); color: var(--secondary); border-color: var(--accent); transform: translateY(-2px); }
+    main { max-width: 1100px; margin: -2rem auto 3rem; padding: 0 1rem; display: grid; gap: 1.5rem; }
+    .card { background: var(--card); border-radius: 16px; padding: 1.5rem; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
+    .card h2 { margin-top: 0; font-size: 1.25rem; color: var(--secondary); display: flex; align-items: center; gap: 0.5rem; }
+    .card h2::after { content: ''; flex: 1; height: 1px; background: #e2e8f0; margin-right: 10px; }
+    .grid-dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+    .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-top: 1rem; }
+    .stat-box { background: #f1f5f9; padding: 1rem; border-radius: 12px; text-align: center; border-bottom: 3px solid var(--primary); }
+    .stat-val { font-size: 1.5rem; font-weight: 800; color: var(--secondary); display: block; }
+    .stat-label { font-size: 0.75rem; color: #64748b; text-transform: uppercase; }
+    .chart-container { position: relative; height: 300px; width: 100%; margin-top: 1rem; }
+    .live-indicator { display: inline-block; width: 8px; height: 8px; background: #ef4444; border-radius: 50%; margin-left: 5px; animation: blink 1s infinite; }
+    @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+    .btn-action { background: var(--secondary); color: #fff; border: none; padding: 0.8rem 1.5rem; border-radius: 8px; cursor: pointer; font-weight: 600; width: 100%; margin-top: 10px; transition: 0.2s; }
+    .btn-action:hover { opacity: 0.9; }
+    .btn-action.stop { background: #ef4444; }
+    .alert-log { margin-top: 1rem; height: 120px; overflow-y: auto; background: #0f172a; color: #10b981; padding: 0.8rem; border-radius: 8px; font-family: monospace; font-size: 0.8rem; }
+    .alert-log p { margin: 0 0 5px; }
+    .list-item { display: flex; align-items: flex-start; gap: 0.8rem; margin-bottom: 1rem; }
+    .icon-circle { background: #dcfce7; color: var(--primary); min-width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.8rem; }
+    footer { text-align: center; padding: 2rem; color: #64748b; font-size: 0.85rem; }
+    @media (max-width: 768px) { header h1 { font-size: 1.5rem; } }
   </style>
 </head>
 <body>
-
 <header>
-  <div class="lang-switch">
-    <button>AR</button>
-    <button>FR</button>
-    <button>EN</button>
-  </div>
-  <h1>منصة SIREP Oasis Lab</h1>
-  <p>نموذج أولي لواحة ذكية بالطاقة المتجددة والذكاء الاصطناعي</p>
+  <h1>SIREP Oasis Nexus</h1>
+  <p>المنصة الذكية المتكاملة لإدارة الطاقة والري في الواحات المستدامة</p>
+  <div class="status-badge">مشروع مرشح لعلامة Startup Label - ASF / CDE</div>
+  <nav>
+    <button class="active" onclick="switchTab('dash', this)">لوحة القيادة</button>
+    <button onclick="switchTab('tech', this)">الهندسة التقنية</button>
+    <button onclick="switchTab('business', this)">الجدوى الاقتصادية</button>
+    <button onclick="switchTab('impact', this)">الأثر البيئي</button>
+  </nav>
 </header>
-
 <main>
-
-  <section class="card">
-    <h2>بطاقة تعريف المشروع <span class="badge">Startup / CEEI</span></h2>
-    <p class="tagline">
-      منصة تجريبية تربط بين إنتاج الطاقة المتجددة في الواحة، تخزينها، وتوزيعها على الماء والخدمات
-      الأساسية، مع لوحة رقمية للمراقبة واتخاذ القرار.
-    </p>
-  </section>
-
-  <section class="card">
-    <h2>المشكلة</h2>
-    <ul>
-      <li>ضياع كبير للطاقة والماء في الواحات بسبب غياب المراقبة الذكية.</li>
-      <li>تكاليف تشغيل مرتفعة لمضخات الماء والإنارة والتبريد.</li>
-      <li>صعوبة اتخاذ قرارات مبنية على بيانات لحظية في المناطق الصحراوية.</li>
-    </ul>
-  </section>
-
-  <section class="card">
-    <h2>الحل المقترح</h2>
-    <ul>
-      <li>تركيب عقدة SIREP محلية (حساسات + متحكم + اتصال) في الواحة.</li>
-      <li>لوحة تحكم ويب بسيطة مثل هذه الصفحة لعرض الطاقة، الماء، والإنذارات.</li>
-      <li>خوارزمية إدارة طاقة (EMS) تقرر أوقات تشغيل المضخات والأحمال الذكية.</li>
-    </ul>
-  </section>
-
-  <section class="card">
-    <h2>قيمة المشروع للمسابقة</h2>
-    <ul>
-      <li>مشروع مبتكر يدمج الطاقة المتجددة، IoT، والذكاء الاصطناعي في سياق واقعي (الواحات).</li>
-      <li>قابل للتجريب في واحة واحدة ثم النسخ إلى واحات أخرى مع نفس المنصة.</li>
-      <li>يمهّد لإنشاء مؤسسة ناشئة متخصصة في حلول الواحة الذكية في الجزائر.</li>
-    </ul>
-    <div class="cta">
-      <a href="#">تحميل عرض المشروع (PDF)</a>
+  <div id="dash" class="tab-content">
+    <div class="grid-dashboard">
+      <div class="card">
+        <h2><span class="live-indicator"></span> البيانات اللحظية (SCADA)</h2>
+        <div class="chart-container"><canvas id="mainChart"></canvas></div>
+        <div class="stat-grid">
+          <div class="stat-box"><span class="stat-val" id="val-solar">8.4</span><span class="stat-label">إنتاج شمسي (kW)</span></div>
+          <div class="stat-box"><span class="stat-val" id="val-water">120</span><span class="stat-label">تدفق الماء (L/min)</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <h2>التحكم الذكي (EMS)</h2>
+        <div class="stat-grid">
+          <div class="stat-box"><span class="stat-val" id="val-batt">92%</span><span class="stat-label">مستوى التخزين</span></div>
+          <div class="stat-box"><span class="stat-val" id="val-soil">45%</span><span class="stat-label">رطوبة التربة</span></div>
+        </div>
+        <button id="pumpBtn" class="btn-action" onclick="togglePump()">بدء دورة الري الذكي</button>
+        <div class="alert-log" id="log"><p>> النظام جاهز العمل...</p><p>> فحص الاتصال بعقدة SIREP-01: متصل</p></div>
+      </div>
     </div>
-  </section>
-
+  </div>
+  <div id="tech" class="tab-content" style="display:none">
+    <div class="card">
+      <h2>الهيكلة التقنية للنظام</h2>
+      <div class="list-item"><div class="icon-circle">1</div><div><strong>وحدات التحكم المحلية:</strong> أجهزة IoT مبنية على ESP32/ARM.</div></div>
+      <div class="list-item"><div class="icon-circle">2</div><div><strong>بروتوكول الاتصال:</strong> استخدام LoRaWAN و MQTT.</div></div>
+    </div>
+  </div>
+  <div id="business" class="tab-content" style="display:none">
+    <div class="card">
+      <h2>النموذج الربحي</h2>
+      <p>يستهدف المشروع المزارع الكبرى والمستثمرين في الجنوب الجزائري.</p>
+    </div>
+  </div>
+  <div id="impact" class="tab-content" style="display:none">
+    <div class="card">
+      <h2>الاستدامة</h2>
+      <div class="stat-grid">
+        <div class="stat-box"><span class="stat-val">CO2</span><span class="stat-label">تقليل الانبعاثات</span></div>
+        <div class="stat-box"><span class="stat-val">H2O</span><span class="stat-label">كفاءة مائية</span></div>
+      </div>
+    </div>
+  </div>
 </main>
-
 <footer>
-  © 2026 SIREP Oasis Lab –ميع الحقوق محفوظة لصاحبها2025 بلقاسم محروق الراس-نموذج تجريبي لملف مسابقةج CEEI / Startup.dz
+  <p>تصميم وتطوير: فريق SIREP Oasis Lab | 2026</p>
 </footer>
-
+<script>
+  function switchTab(id, btn) {
+    document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
+    document.getElementById(id).style.display = 'block';
+    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  const ctx = document.getElementById('mainChart').getContext('2d');
+  const mainChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['08:00', '10:00', '12:00', '14:00', '16:00', '18:00'],
+      datasets: [{
+        label: 'الإنتاج (kW)',
+        data: [2, 5, 12, 11, 7, 3],
+        borderColor: '#006233',
+        backgroundColor: 'rgba(0,98,51,0.1)',
+        fill: true, tension: 0.4
+      }]
+    }
+  });
+  let pumpActive = false;
+  function togglePump() {
+    pumpActive = !pumpActive;
+    const btn = document.getElementById('pumpBtn');
+    const log = document.getElementById('log');
+    if(pumpActive) {
+      btn.innerText = 'إيقاف دورة الري';
+      btn.classList.add('stop');
+      log.innerHTML += `<p>> ${new Date().toLocaleTimeString('ar-DZ')}: تم تفعيل المضخة</p>`;
+    } else {
+      btn.innerText = 'بدء دورة الري الذكي';
+      btn.classList.remove('stop');
+      log.innerHTML += `<p>> ${new Date().toLocaleTimeString('ar-DZ')}: تم إيقاف النظام</p>`;
+    }
+    log.scrollTop = log.scrollHeight;
+  }
+  setInterval(() => {
+    const val = (Math.random() * 5 + 7).toFixed(1);
+    document.getElementById('val-solar').innerText = val;
+  }, 3000);
+</script>
 </body>
 </html>
